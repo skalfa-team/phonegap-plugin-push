@@ -361,6 +361,8 @@
     }
     NSLog(@"Push Plugin register success: %@", deviceToken);
 
+NSMutableDictionary *results = [NSMutableDictionary dictionary];
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
     // [deviceToken description] is like "{length = 32, bytes = 0xd3d997af 967d1f43 b405374a 13394d2f ... 28f10282 14af515f }"
     NSString *token = [self hexadecimalStringFromData:deviceToken];
@@ -370,6 +372,8 @@
                         stringByReplacingOccurrencesOfString:@">" withString:@""]
                        stringByReplacingOccurrencesOfString: @" " withString: @""];
 #endif
+
+[results setValue:token forKey:@"deviceToken"];
 
 #if !TARGET_IPHONE_SIMULATOR
     // Get Bundle Info for Remote Registration (handy if you have more than one app)
